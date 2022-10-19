@@ -40,57 +40,6 @@ int main () {
     while (score1_total <= 100 && score2_total <= 20) {
         cout << "Player 1 rolls first.\n";
         srand(time(0));
-       
-        do {
-            cout << "Player 2 turn" << endl;
-            die1 = rollDie();
-            die2 = rollDie();
-            displayRollResults(die1, die2);
-            isTurnScoreLost(die1, die2);
-            if (die1 != 1 && die2 != 1) {
-                score2_total += die1 + die2;
-                cout << "Total score is " << score2_total << endl;
-            }
-            if (die1 == 1 || die2 == 1) {
-                score2_total = score2_total;
-                cout << "Total score is " << score2_total << endl;
-                break;
-            }
-            if (die1 == 1 && die2 == 1) {
-                score2_total = score2_org;
-                cout << "Total score is " << score2_total << endl;
-                break;
-            }
-        } while (score2_total < 20);
-    }
-    if (score2_total >= 20) {
-        cout << "Player 2 wins!\n" << "Game over." << endl;
-    }
-}
-
-    int rollDie(void) {
-         const int high_die = 6; //Parameters for number of sides on dice
-        const int low_die = 1;
-        return rand() % high_die + low_die;
-    }
-
-    void displayRollResults(int die1, int die2) {
-        cout << "Player 2 rolled a " << die1 << " and a " << die2 << endl;
-    }
-
-    bool isTurnScoreLost(int die1value, int die2value) {
-        //Below are the parameters  for the score that is returned
-        //during each turn depending on what is rolled.
-        int score2 = 0;
-        if (die1value == 1 || die2value == 1) {
-            score2 = 0;
-        }
-        else if (die1value != 1 && die2value != 1) {
-            score2 = die1value + die2value;
-        }
-        cout << "Turn score is " << score2 << endl;
-    }
-        /* Player 1 Code
         cout << "Would you like to play? (R/S): ";
         while (cin >> continuePlay) {
             if (continuePlay == 'r' || continuePlay == 'R') {
@@ -99,45 +48,44 @@ int main () {
                     die1 = rollDie(); //Generates each dice roll number
                     die2 = rollDie();
                     displayRollResults(die1, die2); //Displays each dice roll 
-                    isTurnScoreLost(die1, die2);
-                    // isTotalScoreLost(die1, die2);
-                    if (die1 != 1 && die2 != 1) {
-                        score1_total += die1 + die2;
-                        cout << "Total score is " << score1_total << endl; 
-                        cout << "Do you want to roll again (R/S): ";
-                        cin >> continuePlay;
-                        if (continuePlay == 's' || continuePlay == 'S') {
-                            return 0;
-                        }
-                    }
-                    if (die1 == 1 || die2 == 1) {
-                        score1_total = score1_total;
-                        cout << "Total score is " << score1_total << endl;
-                        break;
-                    }
-                    else if (die1 == 1 && die2 == 1) {
-                        score1_total = score1_org;
-                        cout << "Total score is " << score1_total << endl;
-                        break;
-                    }
+                    score1 = score1 + isTurnScoreLost(die1, die2);
+                    score1_total = isTotalScoreLost(die1, die2);
                 } while (score1_total < 100);
             }
             if (score1_total >= 100) {
                 cout << "Player 1 wins!\n" << "Game Over." << endl;
                 return 0;
             }
-            else if (score1_total != 100 && score2_total != 100) {
-                do {
-
-                }
-            }
-       
         }
+       /*
+        if (score1_total < 100 && score2_total < 100) {
+            do {
+                cout << "Player 2 turn" << endl;
+                die1 = rollDie();
+                die2 = rollDie();
+                displayRollResults(die1, die2);
+                isTurnScoreLost(die1, die2);
+                if (die1 != 1 && die2 != 1) {
+                    score2_total += die1 + die2;
+                    cout << "Total score is " << score2_total << endl;
+                }
+                if (die1 == 1 || die2 == 1) {
+                    score2_total = score2_total;
+                    cout << "Total score is " << score2_total << endl;
+                    break;
+                }
+                if (die1 == 1 && die2 == 1) {
+                    score2_total = score2_org;
+                    cout << "Total score is " << score2_total << endl;
+                    break;
+                }
+            } while (score2_total < 20);
+        }
+        if (score2_total >= 100) {
+            cout << "Player 2 wins!\n" << "Game over." << endl;
+        }
+        */
     }
-}
-
-char getUserInput(void) {
-
 }
 
 int rollDie(void) {
@@ -148,36 +96,47 @@ int rollDie(void) {
 
 void displayRollResults(int die1, int die2) {
     cout << "Player 1 rolled a " << die1 << " and a " << die2 << endl;
+    //cout << "Player 2 rolled a " << die1 << "and a " << die2 << endl;
 }
 
 bool isTurnScoreLost(int die1value, int die2value) {
     //Below are the parameters  for the score that is returned
     //during each turn depending on what is rolled.
     int score1 = 0;
+    int score2 = 0;
     if (die1value == 1 || die2value == 1) {
         score1 = 0;
+       // score2 = 0;
     }
     else if (die1value != 1 && die2value != 1) {
         score1 = die1value + die2value;
+        //score2 = die1value + die2value;
     }
     cout << "Turn score is " << score1 << endl;
+    //cout << "Turn score is " << score2 << endl;
 }
-*/
-/* Code for Total Score
+
 bool isTotalScoreLost(int die1value, int die2value) {
-    //Displays the current total score after each turn is over.
-    int score1;
-    int score1_total = 0;
+    int score1_total;
+    int score1_org = 0;
+    char continuePlay;
     if (die1value != 1 && die2value != 1) {
         score1_total += die1value + die2value;
+        cout << "Total score is " << score1_total << endl; 
+        cout << "Do you want to roll again (R/S): ";
+        cin >> continuePlay;
+        if (continuePlay == 's' || continuePlay == 'S') {
+            return 0;
+        }
     }
     if (die1value == 1 || die2value == 1) {
-            score1_total = score1_total;
-        }
-    if (die1value == 1 && die2value == 1) {
-        score1_total = 0;
+        score1_total = score1_total;
+        cout << "Total score is " << score1_total << endl;
+    }
+    else if (die1value == 1 && die2value == 1) {
+        score1_total = score1_org;
+        cout << "Total score is " << score1_total << endl;
     }
     cout << "Total score is " << score1_total << endl;
 }
-*/
 
