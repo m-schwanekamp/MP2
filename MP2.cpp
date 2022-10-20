@@ -101,16 +101,13 @@ int main () {
             return 0;
             }
 
-            cout << "Turn score is " << score1 << endl;
+            cout << "Turn score is " << score2 << endl;
                     
-            cout << "Total score is " << score1_total << endl;
-       
-            cout << "Do you want to roll again (R/S): ";
+            cout << "Total score is " << score2_total << endl;
         }
 
-        cout << "Turn score is " << score1 << endl;         
-        cout << "Total score is " << score1_total << endl;            
-        cout << "Do you want to roll again (R/S): ";
+        cout << "Turn score is " << score2 << endl;         
+        cout << "Total score is " << score2_total << endl;            
     }
 }
 
