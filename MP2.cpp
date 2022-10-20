@@ -155,4 +155,3 @@ char getUserInput(void) {
     cin >> a;
     return a;
 }
-
