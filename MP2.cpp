@@ -111,17 +111,7 @@ int main() {
 //These functions tie into the main function by generating random
 //numbers and testing for true or false throughout the game. They 
 //also determine correct user input for each human turn.
-char getUserInput(void) {
-    char a; //Input variable for human player
-    cin >> a;
-    if (a == 'r' || a == 'R') {
-        return a;
-    }
-    if (a == 's' || a == 'S') {
-        return 0;
-    }
-    else return 0;
-}
+
 int rollDie(void) {
     //This function generates a random number for each dice.
     const int high_die = 6; //Parameters for number of sides on dice
@@ -160,5 +150,9 @@ bool isWinningScore(int score) {
     }
     else return false;
 }
-
+char getUserInput(void) {
+    char a; //Input variable for human player
+    cin >> a;
+    return a;
+}
 
